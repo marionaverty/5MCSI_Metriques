@@ -14,16 +14,21 @@
           ['2017', 1030, 540, 350]
         ]);
 
-        var options = {
-          chart: {
-            title: 'Company Performance',
-            subtitle: 'Sales, Expenses, and Profit: 2014-2017',
-          }
-        };
+         var options = {
+      title: 'Évolution des températures de Paris pour les 16 prochains jours',
+      curveType: 'function',
+      legend: { position: 'bottom' }
+    };
 
         var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
 
         chart.draw(data, google.charts.Bar.convertOptions(options));
+      
+       fetch('/paris/')
+    .then(response => response.json())
+    .then(data => {
+      drawChart(data);
+    })
       }
     </script>
   </head>
