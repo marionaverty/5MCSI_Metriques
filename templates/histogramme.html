@@ -6,14 +6,14 @@
       google.charts.setOnLoadCallback(drawChart);
       
       function drawBackgroundColor() {
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales', 'Expenses', 'Profit'],
-          ['2014', 1000, 400, 200],
-          ['2015', 1170, 460, 250],
-          ['2016', 660, 1120, 300],
-          ['2017', 1030, 540, 350]
-        ]);
+      function drawChart(data) {
+        var dataTable = new google.visualization.DataTable();
+    dataTable.addColumn('string', 'Date');
+    dataTable.addColumn('number', 'Valeur');
+    data.results.forEach(entry => {
+      var date = new Date(entry.Jour * 1000);
+      dataTable.addRow([date.toLocaleDateString(), entry.temp]);
+    });
 
          var options = {
       title: 'Évolution des températures de Paris pour les 16 prochains jours',
