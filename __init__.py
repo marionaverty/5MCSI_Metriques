@@ -38,7 +38,7 @@ def mongraphiqueG():
   
 @app.route("/commit/")
 def commits():
-    return render-template("commit.html")
+    return render_template("commit.html")
 
   
 if __name__ == "__main__":
