@@ -4,7 +4,8 @@
     <script type="text/javascript">
       google.charts.load('current', {'packages':['bar']});
       google.charts.setOnLoadCallback(drawChart);
-
+      
+      function drawBackgroundColor() {
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Year', 'Sales', 'Expenses', 'Profit'],
@@ -23,13 +24,13 @@
         var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
 
         chart.draw(data, google.charts.Bar.convertOptions(options));
-      
+      }
        fetch('/paris/')
     .then(response => response.json())
     .then(data => {
       drawChart(data);
     })
-      }
+  }
     </script>
   </head>
   <body>
