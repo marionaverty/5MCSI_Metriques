@@ -39,53 +39,41 @@ def mongraphiqueG():
 @app.route("/commits/")
 def commits():
   import requests
-import matplotlib.pyplot as plt
 from datetime import datetime
 
-# Fonction pour extraire les minutes à partir d'une chaîne de date
+# Fonction pour extraire les minutes d'une chaîne de date
 def extract_minutes(date_string):
     date_object = datetime.strptime(date_string, '%Y-%m-%dT%H:%M:%SZ')
     minutes = date_object.minute
     return minutes
 
-# API URL pour extraire les commits
-api_url = "https://api.github.com/repos/OpenRSI/5MCSI_Metriques/commits"
+# URL de l'API GitHub pour les commits
+github_api_url = "https://api.github.com/repos/OpenRSI/5MCSI_Metriques/commits"
 
-# Effectuer la requête GET à l'API
-response = requests.get(api_url)
+# Effectuer une requête GET à l'API GitHub
+response = requests.get(github_api_url)
 
 # Vérifier si la requête a réussi
 if response.status_code == 200:
-    # Extraire les données JSON de la réponse
-    commits_data = response.json()
-
-    # Initialiser un dictionnaire pour stocker le nombre de commits par minute
-    commits_per_minute = {}
+    commits_data = response.json()  # Convertir la réponse en JSON
+    commits_per_minute = {}  # Dictionnaire pour stocker le nombre de commits par minute
 
     # Parcourir les données des commits
     for commit in commits_data:
-        # Extraire la date du commit et les minutes correspondantes
         commit_date = commit['commit']['author']['date']
-        minute = extract_minutes(commit_date)
+        commit_minute = extract_minutes(commit_date)
+        
+        # Ajouter ou incrémenter le nombre de commits pour cette minute
+        commits_per_minute[commit_minute] = commits_per_minute.get(commit_minute, 0) + 1
 
-        # Mettre à jour le dictionnaire avec le nombre de commits pour cette minute
-        commits_per_minute[minute] = commits_per_minute.get(minute, 0) + 1
+    # Afficher le nombre de commits par minute
+    for minute, count in commits_per_minute.items():
+        print(f"{minute} : {count}")
 
-    # Convertir le dictionnaire en listes de minutes et de nombre de commits
-    minutes = list(commits_per_minute.keys())
-    commits_count = list(commits_per_minute.values())
-
-    # Tracer le graphique
-    plt.figure(figsize=(10, 6))
-    plt.plot(minutes, commits_count, marker='o', linestyle='-')
-    plt.title('Nombre de Commits par Minute')
-    plt.xlabel('Minute')
-    plt.ylabel('Nombre de Commits')
-    plt.grid(True)
-    plt.show()
-
+    # Maintenant, vous pouvez utiliser ces données pour créer votre graphique
 else:
-    print("La requête à l'API a échoué.")
+    print("Échec de la requête à l'API GitHub")
+
   
 if __name__ == "__main__":
   app.run(debug=True)
