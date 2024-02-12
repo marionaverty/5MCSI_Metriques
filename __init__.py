@@ -36,8 +36,8 @@ def mongraphique():
 def mongraphiqueG():
     return render_template("histogramme.html")
 
-@app.route("/commit/")
-def commit():
+@app.route("/commits/")
+def commits():
   import requests
 import matplotlib.pyplot as plt
 from datetime import datetime
