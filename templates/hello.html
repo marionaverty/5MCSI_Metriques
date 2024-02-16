@@ -35,7 +35,7 @@ Vous observerez que nous utilisons une API gratuite fourni par Openweathermap. C
 <p>Ce qui nous intéresse à présent, c'est extraire la valeur de [dt] (c'est à dire les dates) et les valeurs stockées dans la clé [temp][day], c'est à dire les températures du jour.</p>
 <p>A noter que les dates ici sont au format "Timestamp". C'est à dire que la donnée est le nombre de secondes depuis le 1 janvier 2000 (un légacy d'UNIX). Les températures sont stockées au format Kelvin (il faudra donc les convertir en °C).</p> 
 <p>Vous allez à présent créer une nouvelle route "/paris/" dans votre application Python pour filtrer l'API d'Openweathermap et extraire uniquement les dates et température du jour. Ci-dessous la route à ajouter dans votre application.
-<pre><code><xmp>
+<pre><code>
 @app.route('/paris/')
 def meteo():
     response = urlopen('https://api.openweathermap.org/data/2.5/forecast/daily?q=Paris,fr&cnt=16&appid=bd5e378503939ddaee76f12ad7a97608')
@@ -57,7 +57,7 @@ Depuis GitHUB, nous allons donc créer et déposer dans le répertoire "template
 </p>
 <p>Etape 1.1 : Création du fichier graphique.html
 Dans votre répertoire templates, créez un fichier graphique.html contenant le code suivant :
-<pre><code><xmp>
+<pre><code>
 <html>
   <head>
     <meta charset="UTF-8" />
@@ -71,7 +71,7 @@ Dans votre répertoire templates, créez un fichier graphique.html contenant le 
 <p>Etape 1.2 : Création d'une nouvelle route
 Créez à présent une nouvelle route afin de pouvoir consulter votre fichier HTML depuis votre site en ligne.
 Pour cela, ajouter le code ci-dessous dans votre fichier __init__.py :
-<pre><code><xmp>
+<pre><code>
 @app.route("/rapport/")
 def mongraphique():
     return render_template("graphique.html")
