@@ -58,7 +58,7 @@ Depuis GitHUB, nous allons donc créer et déposer dans le répertoire "template
 <p>Etape 1.1 : Création du fichier graphique.html
 Dans votre répertoire templates, créez un fichier graphique.html contenant le code suivant :
 <pre><code>
-<html>
+<html lang>
   <head>
     <meta charset="UTF-8" />
     <title>Graphique</title>
@@ -85,7 +85,7 @@ Nous avons également découvert que les Framework (cadre de travail) nous impos
 Pour cela, nous devons utiliser les données de notre nouvelle API /rapport/ et les injecter dans notre fichier graphique.html.
 Nous allons utiliser une bibliothèque open source fournie par Google pour créer ce graphique.</p>
 <p>Modifier votre précédent fichier graphique.html dans GitHUB et remplacer son code par celui-ci :
-<pre><code><xmp>
+<pre><code>
 <html>
   <head>
     <meta charset="UTF-8" />
@@ -151,7 +151,7 @@ Ce nouveau graphique sera accessible sur votre site en ligne via le chemin suiva
 <p>https://api.github.com/repos/OpenRSI/5MCSI_Metriques/commits</p>
 <p>Indice N°2 : Les données qui nous intéressent ici sont stockées dans la clé suivante : [Commit][author][date]</p>
 <p>Indice N°3 : Voici une route qui permet d'extraire les minutes d'une information formatée comme suit : "2024-02-11T11:57:27Z" </p>
-<pre><code><xmp>
+<pre><code>
 @app.route('/extract-minutes/<date_string>')
 def extract_minutes(date_string):
         date_object = datetime.strptime(date_string, '%Y-%m-%dT%H:%M:%SZ')
